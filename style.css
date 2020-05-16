@@ -1,0 +1,13 @@
+.high {
+    background-color: red;
+    color: whitesmoke;
+};
+
+.low {
+    background-color: yellow;
+    color: whitesmoke;
+};
+
+h1 {
+    color: blue;
+}

@@ -1,8 +1,5 @@
-//all variables
+//constant variables
  const apiKey = "6b8e9a03868aa6b59b31dc84696dc422";
- const apiKey2 = '56149c9c2961bc5e9bc85376b22b499b';
- let cityLat = navigator.geolocation;
- let cityLon = navigator.geolocation;
 //all functions
 function weatherSearch(areaSearch) {
     $.ajax({
@@ -21,17 +18,26 @@ function weatherSearch(areaSearch) {
         method: "GET"
     }).then(function (response) {
         console.log(response);
-        $('.uv-index').text(`UV Index: ${response.current.uvi}`); 
-        
-    // weather search logic here
+        $('.uv-index').text(`UV Index: ${response.current.uvi}`);
+    });
+    $.ajax({
+        url: `https://api.openweathermap.org/data/2.5/forecast/daily?q=${areaSearch}&cnt=7&appid=56149c9c2961bc5e9bc85376b22b499b`,
+        method: "GET"
+    }).then(function (response) {
+        console.log(response)
     });
 }
 
+
 function uvIndex () {
     let uvIndex = response.current.uvi;
-    if (uvIndex > 7) {
-        $(this).css("color", "yellow")
+    if (uvIndex < 7) {
+        $('#uv-index').addClass('low');
     }
+    else  {
+        $('#uv-index').addClass('high');
+    }
+
 }
 //all on click events below:
 $("#searchBtn").click(function(){
