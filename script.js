@@ -5,7 +5,6 @@
  let cityLon = navigator.geolocation;
 //all functions
 function weatherSearch(areaSearch) {
-    //let queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${areaSearch},us&appid=${apiKey}&units=imperial`;
     $.ajax({
         url: `https://api.openweathermap.org/data/2.5/weather?q=${areaSearch},us&appid=6b8e9a03868aa6b59b31dc84696dc422&units=imperial`,
         method: "GET"
@@ -16,9 +15,7 @@ function weatherSearch(areaSearch) {
         $('.temp').text(`Temperature: ${response.main.temp}`);
         $('.humidity').text(`Humidity:  ${response.main.humidity}`);
         $('.wind-speed').text(`Wind Speed: ${response.wind.speed}`);
-        //
     });
-    //let queryURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLon}&exclude={part}&appid=${apiKey2}`;
     $.ajax({
         url: `https://api.openweathermap.org/data/2.5/onecall?lat=29.7604&lon=-95.3698&exclude=minutely&appid=6b8e9a03868aa6b59b31dc84696dc422`,
         method: "GET"
@@ -29,6 +26,13 @@ function weatherSearch(areaSearch) {
     // weather search logic here
     });
 }
+
+function uvIndex () {
+    let uvIndex = response.current.uvi;
+    if (uvIndex > 7) {
+        $(this).css("color", "yellow")
+    }
+}
 //all on click events below:
 $("#searchBtn").click(function(){
     var citySearch = $("#searchQuery").val();
@@ -36,6 +40,8 @@ $("#searchBtn").click(function(){
 
 
 });
+
+$()
 
 /* 
 $('#history').click(function(){
