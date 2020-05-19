@@ -11,11 +11,12 @@ function weatherSearch(areaSearch) {
     }).then(function (response) {
         var lat = response.coord.lat
         var lon = response.coord.lon
+        var city = response.name;
         $('.cityName').text(response.name);
         $('.temp').text(`Temperature: ${response.main.temp}`);
         $('.humidity').text(`Humidity:  ${response.main.humidity}`);
         $('.wind-speed').text(`Wind Speed: ${response.wind.speed}`);
-        $('.historyEl').prepend('<li>' + '<button>' + response.name);
+        $('.historyEl').prepend('<li>' + '<button>' + city);
         get5days(lat, lon)
 
         $.ajax({
@@ -62,7 +63,6 @@ function get5days(lat, lon) {
             //append on the page
             fiveDayDiv.append(dateTag);
             $('#fiveDay').append(fiveDayDiv);
-            $('#fiveDay').append('<p>', response);
         }
         
     })
