@@ -6,7 +6,7 @@ function uvIndex (uvInd) {
     //let uvIndex = response.current.uvi;
     console.log(uvInd);
     
-    if (uvInd < 7) {
+    if (uvInd <= 7) {
         $('#uv-index').addClass('low');
     }
     else  {
@@ -16,8 +16,6 @@ function uvIndex (uvInd) {
 }
 
 function get5days(lat, lon) {
-    //console.log(lat, lon);
-    //https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid=${apiKey}
     $.ajax({
         url: `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`,
         method: "GET"
@@ -25,32 +23,20 @@ function get5days(lat, lon) {
         for (let i = 1; i < 6; i++) {
             console.log(response.daily[i])
             let unix_timestamp = response.daily[i].dt
-            // Create a new JavaScript Date object based on the timestamp
-            // multiplied by 1000 so that the argument is in milliseconds, not seconds.
             var date = new Date(unix_timestamp * 1000);
-            // Hours part from the timestamp
             var hours = date.getHours();
-            // Minutes part from the timestamp
             var minutes = "0" + date.getMinutes();
-            // Seconds part from the timestamp
             var seconds = "0" + date.getSeconds();
-    
-            // Will display time in 10:30:23 format
             var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-            console.log(moment(date).format("MMM Do YY"));
             //step 1 create an element
             var fiveDayDiv = $('<div>')
-            //step 2 add info to it
-            fiveDayDiv.attr('class', 'blueDiv col-3 ml-1')
-            //s.1 and s.2 combined:
-            var dateTag =  $('<h3>').text(moment(date).format("MMM Do"))
-            //s.3 append on the page
-            fiveDayDiv.append(dateTag)
-            /*
-            add more elements to fiveDayDiv
-            */
-           //step 3 append to a page
-            $('#fiveDay').append(fiveDayDiv)
+            //add info
+            fiveDayDiv.attr("class", "blueDiv col-2 ml-1")
+            var dateTag =  $('<h5>').text(moment(date).format("MMM Do"))
+            //append on the page
+            fiveDayDiv.append(dateTag);
+            //fiveDayDiv.text(response.main.humidity);
+            $('#fiveDay').append(fiveDayDiv);
         }
         
     });
