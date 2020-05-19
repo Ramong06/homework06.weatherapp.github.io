@@ -33,7 +33,7 @@ function weatherSearch(areaSearch) {
 }
 
 function uvIndex (uvInd) {
-    if (uvInd <= 7) {
+    if (uvInd < 7) {
         $('#uv-index').addClass('low');
     }
     else  {
@@ -44,7 +44,7 @@ function uvIndex (uvInd) {
 
 function get5days(lat, lon) {
     $.ajax({
-        url: `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey2}&units=imperial`,
+        url: `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`,
         method: "GET"
     }).then(function (response) {
         for (let i = 1; i < 6; i++) {
@@ -54,15 +54,20 @@ function get5days(lat, lon) {
             var hours = date.getHours();
             var minutes = "0" + date.getMinutes();
             var seconds = "0" + date.getSeconds();
-            var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+            var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.
+
+            substr(-2);
             //create an element
             var fiveDayDiv = $('<div>');
+            var fiveDayForecast = $('<p>');
+            var dayWeather = response.daily[i].weather[0].main;
             //add info
             fiveDayDiv.attr("class", "blueDiv col-2 ml-1");
             var dateTag =  $('<h5>').text(moment(date).format("MMM Do"));
             //append on the page
             fiveDayDiv.append(dateTag);
             $('#fiveDay').append(fiveDayDiv);
+            $(fiveDayDiv).append(dayWeather);
         }
         
     })
