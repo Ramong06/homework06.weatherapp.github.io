@@ -61,6 +61,7 @@ function get5days(lat, lon) {
             var fiveDayDiv = $('<div>');
             var fiveDayForecast = $('<p>');
             var dayWeather = response.daily[i].weather[0].main;
+            var dayTemp = response.daily[i].temp.day;
             //add info
             fiveDayDiv.attr("class", "blueDiv col-2 ml-1");
             var dateTag =  $('<h5>').text(moment(date).format("MMM Do"));
@@ -68,6 +69,7 @@ function get5days(lat, lon) {
             fiveDayDiv.append(dateTag);
             $('#fiveDay').append(fiveDayDiv);
             $(fiveDayDiv).append(dayWeather);
+            $(fiveDayDiv).append(dayTemp);
         }
         
     })
