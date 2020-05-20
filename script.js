@@ -25,7 +25,7 @@ function weatherSearch(areaSearch) {
         }).then(function (response) {
             console.log(response);
             var uvInd = response.current.uvi;
-            $('#uv-index').text(uvInd);
+            $('#uv-index').text(`UV-Index:  ${uvInd}`);
             uvIndex(uvInd);
         });
     });
