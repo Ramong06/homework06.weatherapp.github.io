@@ -55,21 +55,20 @@ function get5days(lat, lon) {
             var minutes = "0" + date.getMinutes();
             var seconds = "0" + date.getSeconds();
             var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.
-
             substr(-2);
-            //create an element
-            var fiveDayDiv = $('<div>');
-            var fiveDayForecast = $('<p>');
+            //element
+            var fiveDayWeatherDiv = $('<div>');
+            var fiveDayTemp = $('<p>');
             var dayWeather = response.daily[i].weather[0].main;
             var dayTemp = response.daily[i].temp.day;
-            //add info
-            fiveDayDiv.attr("class", "blueDiv col-2 ml-1");
+            fiveDayWeatherDiv.attr("class", "blueDiv col-2 ml-1");
             var dateTag =  $('<h5>').text(moment(date).format("MMM Do"));
             //append on the page
-            fiveDayDiv.append(dateTag);
-            $('#fiveDay').append(fiveDayDiv);
-            $(fiveDayDiv).append(dayWeather);
-            $(fiveDayDiv).append(dayTemp);
+            fiveDayWeatherDiv.append(dateTag);
+            $('#fiveDay').append(fiveDayWeatherDiv);
+            $(fiveDayWeatherDiv).append(dayWeather);
+            $(fiveDayTemp).append(dayTemp);
+            $(fiveDayWeatherDiv).append(fiveDayTemp); 
         }
         
     })
